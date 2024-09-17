@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairPy Customer Service Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="main-container">
+        <div class="chat-container">
+            <h1>FairPy Customer Service</h1>
+            <div id="chat-box" class="chat-box"></div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Type your message here..." aria-label="Type your message">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <div id="reservation-details">
+            <h2>Reservation Details</h2>
+            <p><strong>Customer Name:</strong> <span id="customer-name">{{ reservation.customer_name }}</span></p>
+            <p><strong>Reservation ID:</strong> {{ reservation.reservation_id }}</p>
+            <p><strong>Trip Start:</strong> {{ reservation.trip_start|formatdate }}</p>
+            <p><strong>Trip End:</strong> {{ reservation.trip_end|formatdate }}</p>
+            <p><strong>Duration:</strong> {{ reservation.trip_duration }}</p>
+            <p><strong>Delivery Location:</strong> {{ reservation.delivery_location }}</p>
+            <p><strong>Vehicle ID:</strong> {{ reservation.vehicle_id }}</p>
+            <p><strong>Vehicle Type:</strong> {{ reservation.vehicle_type }}</p>
+            <p><strong>Car Product Type:</strong> {{ reservation['Car Product Type'] }}</p>
+            <p><strong>Guest ID:</strong> {{ reservation.guest_id }}</p>
+            <p><strong>Customer Type:</strong> {{ reservation['Customer Type'] }}</p>
+        </div>
+    </div>
+    <form action="{{ url_for('exit_chat') }}" method="post">
+        <button id="exit-button" type="submit">Exit</button>
+    </form>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>

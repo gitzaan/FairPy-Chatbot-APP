@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairPy Customer Service - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="container">
+        <div class="landing-content">
+            <h1>FairPy Customer Service</h1>
+            <form action="{{ url_for('validate_reservation') }}" method="post">
+                <input type="text" name="reservation_id" placeholder="Enter your reservation ID" required>
+                <button type="submit">Submit</button>
+            </form>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © FairPy, All Rights Reserved 2024</p>
+    </footer>
+</body>
+</html>
