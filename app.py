@@ -51,7 +51,7 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def send_initial_context(thread_id: str, reservation: Dict):
     context_message = f"""
-    context about the customer's reservation:
+    Context about the customer's reservation:
     Reservation ID: {reservation['reservation_id']}
     Trip Start: {reservation['trip_start']}
     Trip End: {reservation['trip_end']}
@@ -221,5 +221,5 @@ def exit_chat():
     session.clear()
     return redirect(url_for('landing'))
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
+if __name__ == '____main__':
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
