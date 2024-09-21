@@ -84,12 +84,12 @@ def create_new_thread(reservation: Dict) -> str:
     send_initial_context(thread_id, reservation)
     return thread_id
 
-def retrieve_faq(query: str, metadata_filters: Optional[Dict] = None, k: int = 5, similarity_threshold: float = 0.3) -> List[Dict]:
+def retrieve_faq(query: str, metadata_filters: Optional[Dict] = None, k: int = 10, similarity_threshold: float = 0.3) -> List[Dict]:
     query_embedding = model.encode([query])
     distances, indices = index.search(query_embedding, k)
     results = []
 
-    strict_filters = ["Car Product Type", "delivery_location_category"]
+    strict_filters = [] #You can Specify Strict Filters here later
     
     for i, idx in enumerate(indices[0]):
         similarity_score = 1 - distances[0][i]
