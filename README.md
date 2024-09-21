@@ -58,7 +58,7 @@ Note : Before running the app locally, you need to make the following changes in
 1) In the last line of the code
    ```
    app.run(debug=True, host='0.0.0.0', port=8080)
-```
+   ```
 
 The application will be accessible at `http://localhost:8080`.
 
