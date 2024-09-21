@@ -67,7 +67,7 @@ def send_initial_context(thread_id: str, reservation: Dict):
     messages = reservation.get('messages', [])
     if messages:
         context_message += "\n\nPrevious conversation with the customer:\n"
-        for message in messages[-10:]:  # Only include the last 5 messages
+        for message in messages[-10:]:  # Only include the last N messages
             context_message += f"{message['author']} ({message['created']}): {message['text']}\n"
 
     client.beta.threads.messages.create(
@@ -168,9 +168,9 @@ def chat_api():
         }
         retrieved_faqs = retrieve_faq(user_message, metadata_filters=metadata_filters, k=5, similarity_threshold=0.3)
 
-        rag_context = "Relevant FAQs:\n" + "\n\n".join(f"Q: {faq['question']}\nA: {faq['answer']}" for faq in retrieved_faqs)
+        rag_context = "Related Questions from customers :\n" + "\n\n".join(f"Question: {faq['question']}\nAnswer: {faq['answer']}" for faq in retrieved_faqs)
 
-        combined_message = f"User Query: {user_message}\n\n{rag_context}\n\nGenerate a response as a customer service rep to the User's Query based on their reservation details and the provided FAQ context (if relevant)."
+        combined_message = f"User Query: {user_message}\n\n{rag_context}\n\nGenerate a response as a customer service rep to the User's Query based on their reservation details and the provided Related FAQ context (if relevant)."
 
         client.beta.threads.messages.create(
             thread_id=thread_id,
